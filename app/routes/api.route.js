@@ -2,7 +2,6 @@ var express = require("express");
 const {
   qrcode,
   status,
-  sendMessage,
   sendOtp,
   validateOtp,
 } = require("../controllers/api.controller");
