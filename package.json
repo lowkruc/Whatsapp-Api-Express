@@ -7,7 +7,7 @@
     "test": "nodemon server.js",
     "start": "node server.js"
   },
-  "author": "Ahmad Saekoni",
+  "author": "Ahmad Saekoni | Lowkruc",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/baileys": "^4.4.0",
