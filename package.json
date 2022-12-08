@@ -1,0 +1,21 @@
+{
+  "name": "wa_api_fix",
+  "version": "1.0.0",
+  "description": "Whatsapp Kulkas Express Api",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Ahmad Saekoni",
+  "license": "ISC",
+  "dependencies": {
+    "@adiwajshing/baileys": "^4.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.20",
+    "pino-pretty": "^9.1.1",
+    "qrcode": "^1.5.1"
+  }
+}

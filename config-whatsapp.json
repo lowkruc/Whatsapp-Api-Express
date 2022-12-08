@@ -1,0 +1,12 @@
+{
+  "ownerNumber": ["6281272128270@c.us"],
+  "ownerName": ["KulkasExpress"],
+  "botName": "Whatsapp Api",
+  "sessionName": "whatsaApp",
+  "gamewaktu": 90,
+  "limitCount": 25,
+  "gcount": {
+    "prem": 35,
+    "user": 15
+  }
+}
