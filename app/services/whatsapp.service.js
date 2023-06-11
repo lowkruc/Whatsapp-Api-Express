@@ -1,10 +1,10 @@
 "use strict";
 
 const {
-  default: makeWALegacySocket,
-  useSingleFileAuthState,
+  default: makeWASocket,
+  useMultiFileAuthState,
   DisconnectReason,
-} = require("@adiwajshing/baileys");
+} = require("@whiskeysockets/baileys");
 const { throws } = require("assert");
 const { on } = require("events");
 const fs = require("fs");
@@ -21,13 +21,12 @@ dotenv.config();
 
 let session = `${process.env.SEASSION_WA_NAME}.json`;
 
-const { state, saveState } = useSingleFileAuthState(session);
+const { state, saveCreds } = useMultiFileAuthState(session);
 
 class WhatsappService {
   conn;
   connectionStatus = "close";
   qrCode = "";
-  isLogin = false;
 
   constructor() {
     this.createWhatsapp();
@@ -38,13 +37,17 @@ class WhatsappService {
     this.conn = null;
   }
 
-  createWhatsapp() {
+  async createWhatsapp() {
+    const { state, saveCreds } = await useMultiFileAuthState(
+      "baileys_auth_info"
+    );
+
     logger.info("Whatsapp service started....");
 
-    this.conn = makeWALegacySocket({
-      printQRInTerminal: false,
+    this.conn = makeWASocket({
+      printQRInTerminal: true,
       auth: state,
-      browser: ["KulkasExpress", "Chrome", "4.0.0"],
+      // browser: ["KulkasExpress", "Chrome", "4.0.0"],
       connectTimeoutMs: 60000,
       keepAliveIntervalMs: 20000,
       logger: newLogger,
@@ -70,12 +73,12 @@ class WhatsappService {
         }
       }
     });
-
-    this.conn.ev.on("creds.update", (data) => {
-      if (data.registrationId == null) {
-        this.isLogin = true;
-      }
-    });
+    this.conn.ev.on("creds.update", saveCreds);
+    // this.conn.ev.on("creds.update", (data) => {
+    //   if (data.registrationId == null) {
+    //     this.isLogin = true;
+    //   }
+    // });
   }
 }
 
